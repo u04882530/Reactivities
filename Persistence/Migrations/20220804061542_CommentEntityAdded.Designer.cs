@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -10,9 +11,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220804061542_CommentEntityAdded")]
+    partial class CommentEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
@@ -146,20 +148,20 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("ActivityId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Body")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("MyPropertyAuthorId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("MyPropertyAuthorId");
 
                     b.ToTable("Comments");
                 });
@@ -339,13 +341,13 @@ namespace Persistence.Migrations
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.AppUser", "Author")
+                    b.HasOne("Domain.AppUser", "MyPropertyAuthor")
                         .WithMany()
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("MyPropertyAuthorId");
 
                     b.Navigation("Activity");
 
-                    b.Navigation("Author");
+                    b.Navigation("MyPropertyAuthor");
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>

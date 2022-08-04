@@ -6,6 +6,7 @@ export interface Profile{
     image?: string;
     bio?: string;
     photos?: Photo[];
+    edit: string;
 }
 
 export class Profile implements Profile {
