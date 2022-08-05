@@ -5,8 +5,12 @@ export interface Profile{
     displayName: string;
     image?: string;
     bio?: string;
+    followersCount: number;
+    followingCount: number;
+    following: boolean;
     photos?: Photo[];
-    edit: string;
+
+
 }
 
 export class Profile implements Profile {
